@@ -1,0 +1,10 @@
+.room-container {
+  padding: 20rpx;
+}
+.room-title {
+  font-size: 28rpx;
+  margin-bottom: 20rpx;
+}
+.players {
+  margin-bottom: 40rpx;
+}

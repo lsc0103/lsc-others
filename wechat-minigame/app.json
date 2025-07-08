@@ -1,3 +1,10 @@
 {
-  "game": "game.js"
+  "pages": [
+    "pages/loading/loading",
+    "pages/index/index",
+    "pages/room/room"
+  ],
+  "window": {
+    "navigationBarTitleText": "星际探索"
+  }
 }

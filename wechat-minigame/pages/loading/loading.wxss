@@ -1,0 +1,4 @@
+.loading-container {
+  margin-top: 200rpx;
+  text-align: center;
+}

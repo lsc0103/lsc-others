@@ -1,0 +1,14 @@
+<view class="stage">
+  <view
+    wx:for="{{players}}"
+    wx:key="name"
+    class="ball"
+    data-index="{{index}}"
+    style="left: {{item.x}}px; top: {{item.y}}px; background: {{item.color}};"
+    catchtouchstart="onTouchStart"
+    catchtouchmove="onTouchMove"
+    catchtouchend="onTouchEnd"
+  >
+    {{item.name}}
+  </view>
+</view>

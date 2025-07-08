@@ -8,15 +8,51 @@ Page({
   },
   onLoad(options) {
     const { roomId = '', host } = options;
-    const player = '玩家' + Math.floor(Math.random() * 1000);
-    this.setData({
-      roomId,
-      isHost: host === '1'
-    });
-    if (!app.globalData.rooms) app.globalData.rooms = {};
-    if (!app.globalData.rooms[roomId]) app.globalData.rooms[roomId] = [];
-    app.globalData.rooms[roomId].push(player);
-    this.setData({ players: app.globalData.rooms[roomId] });
+    this.setData({ roomId, isHost: host === '1' });
+
+    const finish = () => {
+      this.initRoom();
+    };
+
+    if (!app.globalData.userInfo) {
+      wx.getUserProfile({
+        desc: '展示玩家名称',
+        success: res => {
+          app.globalData.userInfo = res.userInfo;
+          finish();
+        },
+        fail: () => {
+          app.globalData.userInfo = { nickName: '游客' + Math.floor(Math.random() * 1000) };
+          finish();
+        }
+      });
+    } else {
+      finish();
+    }
+  },
+  onShow() {
+    const room = app.globalData.rooms[this.data.roomId];
+    if (room && room.started) {
+      wx.redirectTo({ url: `/pages/game/game?roomId=${this.data.roomId}` });
+      return;
+    }
+    if (room) {
+      this.setData({ players: room.players });
+    }
+  },
+  initRoom() {
+    const { roomId } = this.data;
+    if (!app.globalData.rooms[roomId]) {
+      app.globalData.rooms[roomId] = { players: [], started: false };
+    }
+    const room = app.globalData.rooms[roomId];
+    const name = app.globalData.userInfo.nickName;
+    if (!room.players.find(p => p.name === name)) {
+      const colors = ['red', 'green', 'blue', 'orange'];
+      const idx = room.players.length % 4;
+      room.players.push({ name, color: colors[idx], x: 50 + idx * 60, y: 150 });
+    }
+    this.setData({ players: room.players });
   },
   onShareAppMessage() {
     return {
@@ -25,6 +61,8 @@ Page({
     };
   },
   startGame() {
-    wx.showToast({ title: '开始游戏', icon: 'none' });
+    const room = app.globalData.rooms[this.data.roomId];
+    room.started = true;
+    wx.redirectTo({ url: `/pages/game/game?roomId=${this.data.roomId}` });
   }
 });

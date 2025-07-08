@@ -1,5 +1,6 @@
 App({
   globalData: {
-    rooms: {}
+    rooms: {},
+    userInfo: null
   }
 });

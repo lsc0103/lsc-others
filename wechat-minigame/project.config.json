@@ -3,5 +3,5 @@
   "setting": {
     "urlCheck": true
   },
-  "compileType": "game"
+  "compileType": "miniprogram"
 }

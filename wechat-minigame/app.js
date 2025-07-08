@@ -1,1 +1,6 @@
-App({})
+App({
+  globalData: {
+    rooms: {},
+    userInfo: null
+  }
+});

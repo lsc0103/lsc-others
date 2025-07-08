@@ -1,0 +1,4 @@
+<view class="loading-container">
+  <text>加载中... {{progress}}%</text>
+  <progress percent="{{progress}}" show-info/>
+</view>

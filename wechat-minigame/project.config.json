@@ -1,0 +1,7 @@
+{
+  "miniprogramRoot": "./",
+  "setting": {
+    "urlCheck": true
+  },
+  "compileType": "game"
+}

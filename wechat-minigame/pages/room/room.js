@@ -4,31 +4,34 @@ Page({
   data: {
     roomId: '',
     players: [],
-    isHost: false
+    isHost: false,
+    userReady: false
   },
   onLoad(options) {
     const { roomId = '', host } = options;
     this.setData({ roomId, isHost: host === '1' });
 
-    const finish = () => {
+    if (app.globalData.userInfo) {
+      this.setData({ userReady: true });
       this.initRoom();
-    };
-
-    if (!app.globalData.userInfo) {
-      wx.getUserProfile({
-        desc: '展示玩家名称',
-        success: res => {
-          app.globalData.userInfo = res.userInfo;
-          finish();
-        },
-        fail: () => {
-          app.globalData.userInfo = { nickName: '游客' + Math.floor(Math.random() * 1000) };
-          finish();
-        }
-      });
-    } else {
-      finish();
     }
+  },
+  handleAuth() {
+    wx.getUserProfile({
+      desc: '展示玩家名称',
+      success: res => {
+        app.globalData.userInfo = res.userInfo;
+        this.afterAuth();
+      },
+      fail: () => {
+        app.globalData.userInfo = { nickName: '游客' + Math.floor(Math.random() * 1000) };
+        this.afterAuth();
+      }
+    });
+  },
+  afterAuth() {
+    this.setData({ userReady: true });
+    this.initRoom();
   },
   onShow() {
     const room = app.globalData.rooms[this.data.roomId];

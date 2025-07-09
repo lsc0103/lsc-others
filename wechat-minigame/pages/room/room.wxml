@@ -2,8 +2,12 @@
   <text class="room-title">房间ID: {{roomId}}</text>
   <view class="players">
     <text>玩家人数: {{players.length}} / 4</text>
-    <view wx:for="{{players}}" wx:key="index">{{item}}</view>
+    <view wx:for="{{players}}" wx:key="name" class="player-item">{{item.name}}</view>
   </view>
   <button wx:if="{{isHost}}" open-type="share">邀请好友</button>
   <button wx:if="{{isHost}}" bindtap="startGame" disabled="{{players.length<4}}">开始游戏</button>
+
+  <view wx:if="{{!userReady}}" class="auth-mask">
+    <button bindtap="handleAuth">授权进入房间</button>
+  </view>
 </view>

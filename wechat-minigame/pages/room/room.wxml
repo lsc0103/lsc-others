@@ -6,8 +6,5 @@
   </view>
   <button wx:if="{{isHost}}" open-type="share">邀请好友</button>
   <button wx:if="{{isHost}}" bindtap="startGame" disabled="{{players.length<4}}">开始游戏</button>
-
-  <view wx:if="{{!userReady}}" class="auth-mask">
-    <button bindtap="handleAuth">授权进入房间</button>
-  </view>
+  <auth-mask visible="{{showAuth}}" bind:authed="onAuthed" />
 </view>

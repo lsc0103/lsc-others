@@ -2,3 +2,4 @@
   <text>加载中... {{progress}}%</text>
   <progress percent="{{progress}}" show-info/>
 </view>
+<auth-mask visible="{{showAuth}}" bind:authed="onAuthed" />

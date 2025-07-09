@@ -1,0 +1,3 @@
+<view wx:if="{{visible}}" class="auth-mask">
+  <button bindtap="handleAuth" class="auth-btn">授权获取昵称</button>
+</view>

@@ -1,4 +1,5 @@
 <view class="container">
   <text class="title">星际探索</text>
-  <button bindtap="createRoom">邀请好友</button>
+<button bindtap="createRoom">邀请好友</button>
 </view>
+<auth-mask visible="{{showAuth}}" bind:authed="onAuthed" />

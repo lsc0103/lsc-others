@@ -5,7 +5,8 @@ Page({
     roomId: '',
     players: [],
     isHost: false,
-    userReady: false
+    userReady: false,
+    showAuth: false
   },
   onLoad(options) {
     const { roomId = '', host } = options;
@@ -14,23 +15,12 @@ Page({
     if (app.globalData.userInfo) {
       this.setData({ userReady: true });
       this.initRoom();
+    } else {
+      this.setData({ showAuth: true });
     }
   },
-  handleAuth() {
-    wx.getUserProfile({
-      desc: '展示玩家名称',
-      success: res => {
-        app.globalData.userInfo = res.userInfo;
-        this.afterAuth();
-      },
-      fail: () => {
-        app.globalData.userInfo = { nickName: '游客' + Math.floor(Math.random() * 1000) };
-        this.afterAuth();
-      }
-    });
-  },
-  afterAuth() {
-    this.setData({ userReady: true });
+  onAuthed() {
+    this.setData({ userReady: true, showAuth: false });
     this.initRoom();
   },
   onShow() {

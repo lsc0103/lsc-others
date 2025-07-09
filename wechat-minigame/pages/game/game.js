@@ -2,10 +2,14 @@ const app = getApp();
 
 Page({
   data: {
-    players: []
+    players: [],
+    showAuth: false
   },
   onLoad(options) {
     this.roomId = options.roomId || '';
+    if (!app.globalData.userInfo) {
+      this.setData({ showAuth: true });
+    }
   },
   onShow() {
     this.update();
@@ -42,5 +46,8 @@ Page({
   },
   onTouchEnd() {
     this.dragIndex = undefined;
+  },
+  onAuthed() {
+    this.setData({ showAuth: false });
   }
 });

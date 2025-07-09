@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "房间"
+  "navigationBarTitleText": "房间",
+  "usingComponents": {
+    "auth-mask": "/components/auth-mask/auth-mask"
+  }
 }

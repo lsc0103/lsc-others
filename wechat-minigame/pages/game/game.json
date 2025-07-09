@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "星际探索"
+  "navigationBarTitleText": "星际探索",
+  "usingComponents": {
+    "auth-mask": "/components/auth-mask/auth-mask"
+  }
 }
